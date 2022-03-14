@@ -54,7 +54,7 @@
         - ""
         - "# Install tests"
         - "# Set up the WordPress installation, skipping database creation"
-        - "bash <(curl -s \"https://raw.githubusercontent.com/wp-cli/sample-plugin/master/bin/install-wp-tests.sh\") wordpress_test root root mysql latest true"
+        - "bash <(curl -s \"https://raw.githubusercontent.com/wp-cli/sample-plugin/master/bin/install-wp-tests.sh\") wordpress_test root root mariadb latest true"
         - ""
         - "# Wire up object-cache and inform WordPress config about the server location"
         - "echo 'global $memcached_servers;' >> ${WP_TESTS_DIR}/wp-tests-config.php # Notably requires setting it globally"
@@ -88,14 +88,14 @@
         - "php ${WP_TESTS_DIR}/includes/install.php ${WP_TESTS_DIR}/wp-tests-config.php $WP_MULTISITE_STRING"
         - ""
         - "cd ${WP_CORE_DIR}/wp-content/plugins/wp-starter-plugin"
-        - "WP_TESTS_SKIP_INSTALL=1 composer phpunit"
+        - "composer phpunit"
       setup_commands:
         - "echo \"extension=memcache.so\" >> /usr/local/etc/php/conf.d/buddy.ini"
       services:
-        - type: "MYSQL"
-          version: "5.7"
+        - type: "MARIADB"
+          version: "10.3"
           connection:
-            host: "mysql"
+            host: "mariadb"
             port: 3306
             user: "root"
             password: "root"
@@ -195,5 +195,7 @@
       value: "/buddy/wp-starter-plugin/.buddy-tests/wordpress"
     - key: "WP_MULTISITE"
       value: "0"
+    - key: "WP_TESTS_SKIP_INSTALL"
+      value: "1"
     - key: "WP_TESTS_DIR"
       value: "/buddy/wp-starter-plugin/.buddy-tests/wordpress-tests-lib"

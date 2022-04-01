@@ -1,8 +1,5 @@
 {
   "extends": "stylelint-config-sass-guidelines",
-  "plugins": [
-    "stylelint-a11y"
-  ],
   "rules": {
     "max-nesting-depth": [
       3,

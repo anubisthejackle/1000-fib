@@ -1,4 +1,5 @@
 # wp-starter-plugin
+
 A companion plugin to wp-starter-theme, which is used to create custom blocks,
 slotfills, and register custom post types and meta fields.
 

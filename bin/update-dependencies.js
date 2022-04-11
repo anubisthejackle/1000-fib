@@ -53,10 +53,11 @@ const get = (url) => new Promise((resolve, reject) => {
   // eslint-disable-next-line guard-for-in
   for (const dependencyType in packageList) {
     const operator = dependencyType === 'devDependencies' ? '--save-dev' : '--save --save-exact';
+    const prefix = dependencyType === 'devDependencies' ? '^' : '';
     for (const dependency of packageList[dependencyType]) {
       // Compare versions to determine whether to update or skip.
-      const oldVersion = packageJSON[dependencyType][dependency];
-      const newVersion = wpPackageJSON[dependencyType][dependency];
+      const oldVersion = `${packageJSON[dependencyType][dependency]}`;
+      const newVersion = `${prefix}${wpPackageJSON[dependencyType][dependency]}`;
       if (oldVersion === newVersion && newVersion !== undefined) {
         console.log(`${dependency} at correct version. Skipping.`);
       } else {

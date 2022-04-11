@@ -1,40 +1,68 @@
 /* eslint-disable no-console */
 const { execSync } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFile } = require('fs').promises;
+const https = require('https');
 const path = require('path');
 
 // Ensure the version was passed.
 if (process.argv.length !== 3) {
   console.log('Usage: npm run update-dependencies WPVERSION');
-  console.log('Example: npm run update-dependencies 5.9');
+  console.log('Example: npm run update-dependencies 5.9.3');
   process.exit(1);
 }
 
-// Attempt to clone the Gutenberg repo with the specified version.
-execSync(`git clone --depth 1 --branch wp/${process.argv[2]} https://github.com/wordpress/gutenberg /tmp/gutenberg`);
-
-// Update package versions.
-const packageJSON = JSON.parse(readFileSync(path.join(__dirname, '../package.json')));
-['dependencies', 'devDependencies'].forEach((dependencyType) => {
-  Object.keys(packageJSON[dependencyType]).forEach((dependency) => {
-    if (dependency.includes('@wordpress/')) {
-      const packageName = dependency.replace('@wordpress/', '');
-      const packageDefinition = JSON.parse(readFileSync(path.join('/tmp/gutenberg/packages', packageName, 'package.json')));
-      packageJSON[dependencyType][dependency] = packageDefinition.version;
-    }
-  });
+/**
+ * A simple wrapper for https.get that lets it be used with async/await.
+ * @param {string} url - The URL to fetch.
+ * @returns {Promise<string>} A Promise that resolves to a string.
+ */
+const get = (url) => new Promise((resolve, reject) => {
+  https.get(url, (res) => {
+    const data = [];
+    res.on('data', (chunk) => data.push(chunk));
+    res.on('end', () => resolve(Buffer.concat(data).toString()));
+  }).on('error', reject);
 });
 
-// Update the React version.
-const reactPackageJSON = JSON.parse(readFileSync('/tmp/gutenberg/packages/element/package.json'));
-packageJSON.dependencies.react = reactPackageJSON.dependencies.react;
+(async () => {
+  console.log(`Fetching information about dependencies for WP ${process.argv[2]}`);
+  const wpPackageJSON = JSON.parse(await get(`https://raw.githubusercontent.com/WordPress/wordpress-develop/${process.argv[2]}/package.json`));
 
-// Save the new package.json over the old one and reinstall everything.
-writeFileSync(path.join(__dirname, '../package.json'), JSON.stringify(packageJSON, null, '  '));
-process.chdir(path.join(__dirname, '../'));
-execSync('rm -rf node_modules');
-execSync('rm package-lock.json');
-execSync('npm install --legacy-peer-deps');
+  // Get information about our package dependencies.
+  const packageJSON = JSON.parse(await readFile(path.join(__dirname, '../package.json')));
 
-// Clean up.
-execSync('rm -rf /tmp/gutenberg');
+  // Build a list of package dependencies to potentially update.
+  const packageList = {
+    dependencies: Object.keys(packageJSON.dependencies).reduce((acc, item) => {
+      if (item.includes('@wordpress/')) {
+        acc.push(item);
+      }
+      return acc;
+    }, [
+      'lodash',
+      'moment',
+      'react',
+      'react-dom',
+    ]),
+    devDependencies: [
+      '@wordpress/dependency-extraction-webpack-plugin',
+    ],
+  };
+
+  // Loop over dependencies and update each, as necessary.
+  // eslint-disable-next-line guard-for-in
+  for (const dependencyType in packageList) {
+    const operator = dependencyType === 'devDependencies' ? '--save-dev' : '--save --save-exact';
+    for (const dependency of packageList[dependencyType]) {
+      // Compare versions to determine whether to update or skip.
+      const oldVersion = packageJSON[dependencyType][dependency];
+      const newVersion = wpPackageJSON[dependencyType][dependency];
+      if (oldVersion === newVersion && newVersion !== undefined) {
+        console.log(`${dependency} at correct version. Skipping.`);
+      } else {
+        console.log(`Updating ${dependency} from version ${oldVersion} to version ${newVersion}`);
+        execSync(`npm install ${operator} --legacy-peer-deps ${dependency}@${newVersion}`);
+      }
+    }
+  }
+})();

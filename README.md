@@ -113,3 +113,18 @@ watches for changes, and reloading the page.
 - `VideoPicker`: Allows a user to select or remove a video using the media
   modal or by entering a URL. A wrapper around `MediaPicker` that sets the file
   type to video and provides a video player preview.
+
+## Updating Dependencies
+
+To update `@wordpress` dependencies, simply execute:
+
+```sh
+npm run update-dependencies WPVERSION
+```
+
+Where `WPVERSION` is the version of WordPress you are targeting. The version
+must be a major version (e.g., `5.9`). For example:
+
+```sh
+npm run update-dependencies 5.9
+```

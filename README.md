@@ -123,8 +123,11 @@ npm run update-dependencies WPVERSION
 ```
 
 Where `WPVERSION` is the version of WordPress you are targeting. The version
-must be a major version (e.g., `5.9`). For example:
+must include both the major and patch version (e.g., `5.9.3`). For example:
 
 ```sh
-npm run update-dependencies 5.9
+npm run update-dependencies 5.9.3
 ```
+
+The versions are drawn from tags on
+[wordpress-develop](https://github.com/WordPress/wordpress-develop/tags).

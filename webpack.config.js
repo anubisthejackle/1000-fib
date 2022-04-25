@@ -1,6 +1,5 @@
 const glob = require('glob');
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const StatsPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const jsonImporter = require('node-sass-json-importer');

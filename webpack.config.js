@@ -3,6 +3,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const StatsPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
+const jsonImporter = require('node-sass-json-importer');
 const createWriteWpAssetManifest = require('./webpack/wpAssets');
 
 module.exports = (env, { mode }) => ({
@@ -51,10 +52,17 @@ module.exports = (env, { mode }) => ({
         use: [
           'style-loader',
           'css-loader',
+          'postcss-loader',
+          'resolve-url-loader',
           {
-            loader: 'postcss-loader',
+            loader: 'sass-loader',
             options: {
-              plugins: [autoprefixer()],
+              sourceMap: true,
+              sassOptions: {
+                importer: [
+                  jsonImporter(),
+                ],
+              },
             },
           },
           'resolve-url-loader',

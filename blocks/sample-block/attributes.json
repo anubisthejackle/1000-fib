@@ -1,0 +1,10 @@
+{
+  "text": {
+    "default": "",
+    "type": "string"
+  },
+  "mediaId": {
+    "default": 0,
+    "type": "number"
+  }
+}

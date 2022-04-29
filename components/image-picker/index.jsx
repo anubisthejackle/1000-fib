@@ -38,6 +38,7 @@ Preview.propTypes = {
 const ImagePicker = ({
   className,
   imageSize,
+  controlsLocation,
   onReset,
   onUpdate,
   onUpdateURL,
@@ -49,6 +50,7 @@ const ImagePicker = ({
     className={className}
     icon="format-image"
     imageSize={imageSize}
+    controlsLocation={controlsLocation}
     onReset={onReset}
     onUpdate={onUpdate}
     onUpdateURL={onUpdateURL}
@@ -61,6 +63,7 @@ const ImagePicker = ({
 ImagePicker.defaultProps = {
   className: '',
   imageSize: 'thumbnail',
+  controlsLocation: 'inline',
   onUpdateURL: null,
   valueURL: '',
 };
@@ -68,6 +71,7 @@ ImagePicker.defaultProps = {
 ImagePicker.propTypes = {
   className: PropTypes.string,
   imageSize: PropTypes.string,
+  controlsLocation: PropTypes.string,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onUpdateURL: PropTypes.func,

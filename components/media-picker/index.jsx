@@ -77,16 +77,19 @@ const MediaPicker = ({
     return (
       <BlockControls group="other">
         <MediaReplaceFlow
+          name={__('Edit Media', 'wp-starter-plugin')}
           mediaId={value}
           mediaURL={src}
           allowedTypes={allowedTypes}
           onSelect={onUpdate}
           onSelectURL={onUpdateURL}
-        />
-        <ToolbarButton
-          text={__('Remove', 'wp-starter-plugin')}
-          onClick={onReset}
-        />
+        >
+          <ToolbarButton
+            isDestructive
+            text={__('Remove', 'wp-starter-plugin')}
+            onClick={onReset}
+          />
+        </MediaReplaceFlow>
       </BlockControls>
     );
   };

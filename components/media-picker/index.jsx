@@ -36,7 +36,7 @@ const MediaPicker = ({
   className,
   icon,
   imageSize,
-  hasControlsInline,
+  displayControlsInToolbar,
   onReset,
   onUpdate,
   onUpdateURL,
@@ -62,7 +62,7 @@ const MediaPicker = ({
   const src = media ? getMediaURL(media, imageSize) : valueURL;
 
   const controls = () => {
-    if (hasControlsInline) {
+    if (!displayControlsInToolbar) {
       return (
         <Button
           isLarge
@@ -131,7 +131,7 @@ MediaPicker.defaultProps = {
   className: '',
   icon: 'format-aside',
   imageSize: 'thumbnail',
-  hasControlsInline: true,
+  displayControlsInToolbar: false,
   onUpdateURL: null,
   preview: null,
   valueURL: '',
@@ -142,7 +142,7 @@ MediaPicker.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string,
   imageSize: PropTypes.string,
-  hasControlsInline: PropTypes.bool,
+  displayControlsInToolbar: PropTypes.bool,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onUpdateURL: PropTypes.func,

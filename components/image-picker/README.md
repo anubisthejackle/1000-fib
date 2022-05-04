@@ -26,6 +26,7 @@ For more information on how to use this component, see
 |--------------|-------------|----------|----------|----------------------------------------------------------------------------------------------------------|
 | className    | ''          | No       | string   | Class name for the media picker container.                                                               |
 | imageSize    | 'thumbnail' | No       | string   | The size to display in the preview.                                                                      |
+| displayControlsInToolbar | false | No | boolean | Determines if controls should render in the block toolbar.                                                |
 | onReset      |             | Yes      | function | Function to reset the image ID to 0 and/or the image URL to an empty string.                             |
 | onUpdate     |             | Yes      | function | Function to set the image ID on image selection/upload.                                                  |
 | onUpdateURL  | null        | No       | function | Function to set the image URL on entry. If not set, the button to enter a URL manually will not display. |

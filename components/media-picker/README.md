@@ -30,6 +30,7 @@ or an embed instead of just a text link to the selected asset.
 | className    | ''             | No       | string   | Class name for the media picker container.                                                                      |
 | icon         | 'format-aside' | No       | string   | The name of the Dashicon to use next to the title when no selection has been made yet.                          |
 | imageSize    | 'thumbnail'    | No       | string   | If the selected item is an image, the size to display in the preview.                                           |
+| displayControlsInToolbar | false | No | boolean | Determines if controls should render in the block toolbar. |
 | onReset      |                | Yes      | function | Function to reset the attachment ID to 0 and/or the attachment URL to an empty string.                          |
 | onUpdate     |                | Yes      | function | Function to set the attachment ID on attachment selection/upload.                                               |
 | onUpdateURL  | null           | No       | function | Function to set the attachment URL on entry. If not set, the button to enter a URL manually will not display.   |

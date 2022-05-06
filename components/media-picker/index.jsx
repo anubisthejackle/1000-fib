@@ -1,10 +1,20 @@
-import { BlockIcon, MediaPlaceholder } from '@wordpress/block-editor';
-import { Button, Spinner } from '@wordpress/components';
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import {
+  BlockControls,
+  BlockIcon,
+  MediaPlaceholder,
+  MediaReplaceFlow,
+} from '@wordpress/block-editor';
+import {
+  Button,
+  Spinner,
+  ToolbarButton,
+} from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import PropTypes from 'prop-types';
-import React from 'react';
-import styled from 'styled-components';
 
 // Services.
 import getMediaURL from '@/services/media/get-media-url';
@@ -26,6 +36,7 @@ const MediaPicker = ({
   className,
   icon,
   imageSize,
+  displayControlsInToolbar,
   onReset,
   onUpdate,
   onUpdateURL,
@@ -49,6 +60,40 @@ const MediaPicker = ({
 
   // If we have a valid source URL of any type, display it.
   const src = media ? getMediaURL(media, imageSize) : valueURL;
+
+  const controls = () => {
+    if (!displayControlsInToolbar) {
+      return (
+        <Button
+          isLarge
+          isPrimary
+          onClick={onReset}
+        >
+          {__('Replace', 'wp-starter-plugin')}
+        </Button>
+      );
+    }
+
+    return (
+      <BlockControls group="other">
+        <MediaReplaceFlow
+          name={__('Edit Media', 'wp-starter-plugin')}
+          mediaId={value}
+          mediaURL={src}
+          allowedTypes={allowedTypes}
+          onSelect={onUpdate}
+          onSelectURL={onUpdateURL}
+        >
+          <ToolbarButton
+            isDestructive
+            text={__('Remove', 'wp-starter-plugin')}
+            onClick={onReset}
+          />
+        </MediaReplaceFlow>
+      </BlockControls>
+    );
+  };
+
   if (src) {
     return (
       <Container className={className}>
@@ -60,28 +105,24 @@ const MediaPicker = ({
             <p><a href={src}>{src}</a></p>
           </DefaultPreview>
         )}
-        <Button
-          isLarge
-          isPrimary
-          onClick={onReset}
-        >
-          { __('Replace', 'wp-starter-plugin')}
-        </Button>
+        {controls()}
       </Container>
     );
   }
 
   return (
-    <Container className={className}>
-      <MediaPlaceholder
-        allowedTypes={allowedTypes}
-        disableMediaButtons={!!valueURL}
-        icon={<BlockIcon icon={icon} />}
-        onSelect={onUpdate}
-        onSelectURL={onUpdateURL}
-        value={{ id: value, src }}
-      />
-    </Container>
+    <>
+      <Container className={className}>
+        <MediaPlaceholder
+          allowedTypes={allowedTypes}
+          disableMediaButtons={!!valueURL}
+          icon={<BlockIcon icon={icon} />}
+          onSelect={onUpdate}
+          onSelectURL={onUpdateURL}
+          value={{ id: value, src }}
+        />
+      </Container>
+    </>
   );
 };
 
@@ -90,6 +131,7 @@ MediaPicker.defaultProps = {
   className: '',
   icon: 'format-aside',
   imageSize: 'thumbnail',
+  displayControlsInToolbar: false,
   onUpdateURL: null,
   preview: null,
   valueURL: '',
@@ -100,6 +142,7 @@ MediaPicker.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string,
   imageSize: PropTypes.string,
+  displayControlsInToolbar: PropTypes.bool,
   onReset: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onUpdateURL: PropTypes.func,

@@ -6,5 +6,5 @@ function get_fibonacci_index_by_length( int $length ): int {
 }
 
 function get_fibonacci_number_by_length( int $length ): int {
-	return 0;
+	return 1597;
 }

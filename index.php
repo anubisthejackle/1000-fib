@@ -1,17 +1,17 @@
 <?php
 /**
- * Reusable extensions for the WP Starter Plugin site.
+ * Reusable extensions for the Thousand Fib site.
  *
- * Plugin Name: WP Starter Plugin Extensions
- * Plugin URI: https://github.com/alleyinteractive/wp-starter-plugin
- * Description: Extensions to the WP Starter Plugin site.
+ * Plugin Name: Thousand Fib Extensions
+ * Plugin URI: https://github.com/alleyinteractive/thousand-fib
+ * Description: Extensions to the Thousand Fib site.
  * Version: 1.0.0
  * Author: Alley
  *
- * @package WP_Starter_Plugin
+ * @package Thousand_Fib
  */
 
-namespace WP_Starter_Plugin;
+namespace Thousand_Fib;
 
 // Include functions for working with assets (primarily JavaScript).
 require_once __DIR__ . '/inc/assets.php';

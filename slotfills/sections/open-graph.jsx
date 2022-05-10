@@ -10,15 +10,15 @@ import ImagePicker from '@/components/image-picker';
 import usePostMetaValue from '@/hooks/use-post-meta-value';
 
 const OpenGraph = () => {
-  const [description, setDescription] = usePostMetaValue('wp_starter_plugin_open_graph_description');
-  const [image, setImage] = usePostMetaValue('wp_starter_plugin_open_graph_image');
-  const [title, setTitle] = usePostMetaValue('wp_starter_plugin_open_graph_title');
+  const [description, setDescription] = usePostMetaValue('thousand_fib_open_graph_description');
+  const [image, setImage] = usePostMetaValue('thousand_fib_open_graph_image');
+  const [title, setTitle] = usePostMetaValue('thousand_fib_open_graph_title');
 
   return (
     <PluginDocumentSettingPanel
       icon="share"
       name="opengraph"
-      title={__('Open Graph', 'wp-starter-plugin')}
+      title={__('Open Graph', 'thousand-fib')}
     >
       <ImagePicker
         onReset={() => setImage(0)}
@@ -26,12 +26,12 @@ const OpenGraph = () => {
         value={image}
       />
       <TextControl
-        label={__('Title', 'wp-starter-plugin')}
+        label={__('Title', 'thousand-fib')}
         onChange={(next) => setTitle(next)}
         value={title}
       />
       <TextareaControl
-        label={__('Description', 'wp-starter-plugin')}
+        label={__('Description', 'thousand-fib')}
         onChange={(next) => setDescription(next)}
         value={description}
       />

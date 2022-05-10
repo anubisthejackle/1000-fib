@@ -1,5 +1,5 @@
 {
   "core_term_meta": true,
-  "domain": "wp-starter-plugin",
+  "domain": "thousand-fib",
   "require_path": "__DIR__"
 }

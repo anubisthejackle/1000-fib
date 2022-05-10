@@ -17,7 +17,7 @@ const MyComponent = () => {
   return (
     <>
       <TextControl
-        label={__('Set Value', 'wp-starter-plugin')}
+        label={__('Set Value', 'thousand-fib')}
         onChange={(next) => setValue(next)}
         value={value}
       />

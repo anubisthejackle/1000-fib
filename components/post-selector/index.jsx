@@ -42,11 +42,11 @@ const PostSelector = ({
  */
 PostSelector.defaultProps = {
   className: '',
-  emptyLabel: __('No posts found', 'wp-starter-plugin'),
-  label: __('Search for posts', 'wp-starter-plugin'),
+  emptyLabel: __('No posts found', 'thousand-fib'),
+  label: __('Search for posts', 'thousand-fib'),
   maxPages: 5,
   multiple: false,
-  placeholder: __('Search for posts', 'wp-starter-plugin'),
+  placeholder: __('Search for posts', 'thousand-fib'),
   subTypes: [],
   selected: [],
   threshold: 3,

@@ -69,7 +69,7 @@ const MediaPicker = ({
           isPrimary
           onClick={onReset}
         >
-          {__('Replace', 'wp-starter-plugin')}
+          {__('Replace', 'thousand-fib')}
         </Button>
       );
     }
@@ -77,7 +77,7 @@ const MediaPicker = ({
     return (
       <BlockControls group="other">
         <MediaReplaceFlow
-          name={__('Edit Media', 'wp-starter-plugin')}
+          name={__('Edit Media', 'thousand-fib')}
           mediaId={value}
           mediaURL={src}
           allowedTypes={allowedTypes}
@@ -86,7 +86,7 @@ const MediaPicker = ({
         >
           <ToolbarButton
             isDestructive
-            text={__('Remove', 'wp-starter-plugin')}
+            text={__('Remove', 'thousand-fib')}
             onClick={onReset}
           />
         </MediaReplaceFlow>
@@ -100,8 +100,8 @@ const MediaPicker = ({
         {Preview ? (
           <Preview src={src} />
         ) : (
-          <DefaultPreview className="wp-starter-plugin-media-picker__preview">
-            <p>{__('Selected file:', 'wp-starter-plugin')}</p>
+          <DefaultPreview className="thousand-fib-media-picker__preview">
+            <p>{__('Selected file:', 'thousand-fib')}</p>
             <p><a href={src}>{src}</a></p>
           </DefaultPreview>
         )}

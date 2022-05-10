@@ -1,11 +1,11 @@
 <?php
 /**
- * WP Starter Plugin: Custom post type and taxonomy registration
+ * Thousand Fib: Custom post type and taxonomy registration
  *
- * @package WP_Starter_Plugin
+ * @package Thousand_Fib
  */
 
-namespace WP_Starter_Plugin;
+namespace Thousand_Fib;
 
 // Content types and taxonomies should be included below. In order to scaffold
 // them, leave the Begin and End comments in place.

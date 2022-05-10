@@ -3,6 +3,7 @@
 namespace Thousand_Fib\Tests;
 
 use function Thousand_Fib\get_fibonacci_index_by_length;
+use function Thousand_Fib\get_fibonacci_number_by_length;
 
 class Test_Fibonacci extends \WP_UnitTestCase {
 
@@ -11,8 +12,9 @@ class Test_Fibonacci extends \WP_UnitTestCase {
      *
      * @test
      */
-    public function fibonnaci_function_is_available() {
+    public function fibonnaci_functions_are_available() {
         $this->assertTrue( function_exists( 'Thousand_Fib\get_fibonacci_index_by_length') );
+        $this->assertTrue( function_exists( 'Thousand_Fib\get_fibonacci_number_by_length') );
     }
 
 	/**
@@ -72,6 +74,27 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 
 		// Assert
 		$this->assertSame( $expected, $index );
+	}
+
+	/**
+	 * Assert that we are able to generate a Fibonacci number, not index, of a specific length.
+	 *
+	 * @test
+	 */
+	public function can_generate_fibonacci_number_of_specific_length()
+	{
+		$this->markTestIncomplete();
+
+		// Arrange
+		$length   = 4;
+		$expected = 1597;
+
+		// Act
+		$number   = get_fibonacci_number_by_length( $length );
+
+		// Assert
+		$this->assertSame( $expected, $number );
+
 	}
 
 }

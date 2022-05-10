@@ -83,8 +83,6 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	 */
 	public function can_generate_fibonacci_number_of_specific_length()
 	{
-		$this->markTestIncomplete();
-
 		// Arrange
 		$length   = 4;
 		$expected = 1597;
@@ -94,7 +92,6 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 
 		// Assert
 		$this->assertSame( $expected, $number );
-
 	}
 
 }

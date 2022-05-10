@@ -2,7 +2,7 @@
 
 namespace Thousand_Fib\Tests;
 
-use Thousand_Fib\get_fibonacci_index_by_length;
+use function Thousand_Fib\get_fibonacci_index_by_length;
 
 class Test_Fibonacci extends \WP_UnitTestCase {
 

@@ -61,6 +61,8 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	 */
 	public function correct_index_provided_for_first_4_digit_number()
 	{
+		$this->markTestSkipped( 'Test skipped until we have a way of generating Fibonacci numbers.' );
+
 		// Arrange
 		$length   = 4;
 		$expected = 17;

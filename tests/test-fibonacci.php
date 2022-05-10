@@ -2,6 +2,8 @@
 
 namespace Thousand_Fib\Tests;
 
+use Thousand_Fib\get_fibonacci_index_by_length;
+
 class Test_Fibonacci extends \WP_UnitTestCase {
 
     /**
@@ -10,7 +12,7 @@ class Test_Fibonacci extends \WP_UnitTestCase {
      * @test
      */
     public function fibonnaci_function_is_available() {
-        $this->assertTrue( function_exists( 'get_fibonacci_index_by_length') );
+        $this->assertTrue( function_exists( 'Thousand_Fib\get_fibonacci_index_by_length') );
     }
 
 	/**

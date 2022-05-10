@@ -2,7 +2,7 @@
 
 namespace Thousand_Fib\Tests;
 
-use Thousand_Fib\get_fibonacci_index_by_length;
+use function Thousand_Fib\get_fibonacci_index_by_length;
 
 class Test_Fibonacci extends \WP_UnitTestCase {
 
@@ -23,7 +23,15 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	 */
 	public function correct_index_provided_for_first_2_digit_number()
 	{
-		$this->markTestIncomplete();
+		// Arrange
+		$length   = 2;
+		$expected = 7;
+
+		// Act
+		$index    = get_fibonacci_index_by_length( $length );
+
+		// Assert
+		$this->assertSame( $expected, $index );
 	}
 
 	/**

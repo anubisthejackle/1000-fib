@@ -42,7 +42,15 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	 */
 	public function correct_index_provided_for_first_3_digit_number()
 	{
-		$this->markTestIncomplete();
+		// Arrange
+		$length   = 3;
+		$expected = 12;
+
+		// Act
+		$index    = get_fibonacci_index_by_length( $length );
+
+		// Assert
+		$this->assertSame( $expected, $index );
 	}
 
 	/**

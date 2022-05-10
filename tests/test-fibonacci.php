@@ -61,7 +61,15 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	 */
 	public function correct_index_provided_for_first_4_digit_number()
 	{
-		$this->markTestIncomplete();
+		// Arrange
+		$length   = 4;
+		$expected = 17;
+
+		// Act
+		$index    = get_fibonacci_index_by_length( $length );
+
+		// Assert
+		$this->assertSame( $expected, $index );
 	}
 
 }

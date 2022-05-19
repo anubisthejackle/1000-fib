@@ -72,4 +72,21 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 		$this->assertSame( $expected, $index );
 	}
 
+	/**
+	 * The first 1000 digit Fibonacci number can be found.
+	 *
+	 * @test
+	 */
+	public function correct_index_provided_for_first_1000_digit_number()
+	{
+		// Arrange
+		$length   = 1000;
+
+		// Act
+		$index    = get_fibonacci_index_by_length( $length );
+
+		// Assert
+		$this->assertIsInt( $index );
+	}
+
 }

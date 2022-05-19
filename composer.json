@@ -16,7 +16,7 @@
   "scripts": {
     "phpcbf": "phpcbf .",
     "phpcs": "phpcs .",
-    "phpunit": "./vendor/phpunit/phpunit/phpunit",
+    "phpunit": "./vendor/phpunit/phpunit/phpunit --enforce-time-limit",
     "setup": [
       "composer install",
       ". $NVM_DIR/nvm.sh && nvm use && npm ci && npm run build"

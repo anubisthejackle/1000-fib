@@ -2,7 +2,7 @@
 
 namespace Thousand_Fib\Tests;
 
-use function Thousand_Fib\get_fibonacci_index_by_length;
+use function Thousand_Fib\get_first_fibonacci_by_length;
 
 class Test_Fibonacci extends \WP_UnitTestCase {
 
@@ -12,7 +12,7 @@ class Test_Fibonacci extends \WP_UnitTestCase {
      * @test
      */
     public function fibonnaci_function_is_available() {
-        $this->assertTrue( function_exists( 'Thousand_Fib\get_fibonacci_index_by_length') );
+        $this->assertTrue( function_exists( 'Thousand_Fib\get_first_fibonacci_by_length') );
     }
 
 	/**
@@ -28,7 +28,7 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 		$expected = 7;
 
 		// Act
-		$index    = get_fibonacci_index_by_length( $length );
+		[ 'index' => $index ] = get_first_fibonacci_by_length( $length );
 
 		// Assert
 		$this->assertSame( $expected, $index );
@@ -47,7 +47,7 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 		$expected = 12;
 
 		// Act
-		$index    = get_fibonacci_index_by_length( $length );
+		[ 'index' => $index ] = get_first_fibonacci_by_length( $length );
 
 		// Assert
 		$this->assertSame( $expected, $index );
@@ -66,7 +66,7 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 		$expected = 17;
 
 		// Act
-		$index    = get_fibonacci_index_by_length( $length );
+		[ 'index' => $index ] = get_first_fibonacci_by_length( $length );
 
 		// Assert
 		$this->assertSame( $expected, $index );
@@ -81,12 +81,14 @@ class Test_Fibonacci extends \WP_UnitTestCase {
 	{
 		// Arrange
 		$length   = 1000;
+		$expected = 4782;
 
 		// Act
-		$index    = get_fibonacci_index_by_length( $length );
+		[ 'index' => $index ] = get_first_fibonacci_by_length( $length );
 
 		// Assert
 		$this->assertIsInt( $index );
+		$this->assertSame( $expected, $index );
 	}
 
 }
